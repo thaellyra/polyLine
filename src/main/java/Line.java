@@ -1,6 +1,6 @@
 public class Line {
-    public Point start;
-    public Point finish;
+    private Point start;
+    private Point finish;
 
     public Line(Point start, Point finish) {
         this.start = start;
@@ -18,6 +18,22 @@ public class Line {
     }
 
     public double getLength() {
-        return Math.sqrt(Math.pow(finish.X - start.X, 2) + Math.pow(finish.Y - start.Y, 2));
+        return Math.sqrt(Math.pow(finish.getX() - start.getX(), 2) + Math.pow(finish.getY() - start.getY(), 2));
+    }
+
+    public Point getStart() {
+        return start;
+    }
+
+    public void setStart(Point start) {
+        this.start = start;
+    }
+
+    public Point getFinish() {
+        return finish;
+    }
+
+    public void setFinish(Point finish) {
+        this.finish = finish;
     }
 }

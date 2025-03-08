@@ -1,13 +1,15 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PolyLine {
-    public ArrayList<Point> points = new ArrayList<>();
+    private List<Point> points;
 
     public PolyLine() {
     }
 
-    public PolyLine(ArrayList<Point> points) {
-        this.points.addAll(points);
+    public PolyLine(List<Point> points) {
+        this.points = points;
     }
 
     @Override
@@ -15,23 +17,17 @@ public class PolyLine {
         return String.format("Линия %s", points);
     }
 
-    public ArrayList<Line> getLines() {
-        ArrayList<Line> lines = new ArrayList<>();
-
-        int firstIter = 0;
-        Point lastPoint = points.getFirst();
-        for (Point tmpPoint : points) {
-            if (firstIter == 0) {
-                firstIter++;
-                continue;
-            }
-
-            lines.add(new Line(lastPoint, tmpPoint));
-            lastPoint = tmpPoint;
+    public List<Line> getLines() {
+        if (points == null || points.size() <= 1) {
+            return Collections.emptyList();
         }
-
+        List<Line> lines = new ArrayList<>();
+        for (int i = 1; i < points.size(); i++) {
+            lines.add(new Line(points.get(i - 1), points.get(i)));
+        }
         return lines;
     }
+
 
     public double getLength() {
         double sum = 0;
@@ -40,5 +36,13 @@ public class PolyLine {
         }
 
         return sum;
+    }
+
+    public List<Point> getPoints() {
+        return points;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
     }
 }
